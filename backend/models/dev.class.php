@@ -1,0 +1,11 @@
+<?php
+
+  class DevModel extends Model {
+
+    function __construct() {
+
+      parent::__construct();
+
+    }
+
+  }
