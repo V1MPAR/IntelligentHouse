@@ -1,3 +1,7 @@
+@small: ~'only screen and (min-width: 768px)';
+@medium: ~'only screen and (min-width: 992px)';
+@large: ~'only screen and (min-width: 1400px)';
+
 html {
   position: relative;
   min-height: 100%;
@@ -422,5 +426,53 @@ html {
   p {
     font-family: 'Lato', sans-serif;
     color: #000;
+  }
+}
+
+.contact-img {
+  text-align: center;
+  @media @small {
+    text-align: left;
+  }
+  img {
+    width: 200px;
+    height: 200px;
+    @media @small {
+      width: 400px;
+      height: 400px;
+    }
+  }
+}
+
+.contact-header {
+  padding-top: 20px;
+  margin: 0;
+  h1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 24px;
+    color: #CC4A1B;
+  }
+}
+
+.contact-type {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-top: 5px;
+    color: #CC4A1B;
+    .contact-name {
+      color: #000 !important;
+      font-size: 16px;
+    }
+    .contact-mail {
+      color: #CC4A1B !important;
+      font-size: 14px;
+    }
   }
 }
