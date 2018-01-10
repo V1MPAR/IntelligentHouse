@@ -105,7 +105,7 @@
               <ul class="list-inline">
                 <li class="current-item"><a href="http://192.168.0.104/IntelligentHouse/control" class="current-item">Panel kontrolny</a></li>
                 <li><a href="http://192.168.0.104/IntelligentHouse/logs">Logi</a></li>
-                <li><a href="http://192.168.0.104/IntelligentHouse/about-project">O projekcie</a></li>
+                <li><a href="http://192.168.0.104/IntelligentHouse/aboutProject">O projekcie</a></li>
                 <li><a href="http://192.168.0.104/IntelligentHouse/contact">Kontakt</a></li>
               </ul>
               <span id="slide-line"></span>
@@ -114,7 +114,7 @@
               <ul class="list-inline">
                 <li class="current-item col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/control" class="current-item">Panel kontrolny</a></li>
                 <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/logs">Logi</a></li>
-                <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/about-project">O projekcie</a></li>
+                <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/aboutProject">O projekcie</a></li>
                 <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/contact">Kontakt</a></li>
               </ul>
             </div>

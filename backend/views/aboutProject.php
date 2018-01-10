@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Intelligent House :: Logs</title>
+    <title>Intelligent House :: About Project</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -57,8 +57,8 @@
             <div class="col-xs-12 col-md-8 menu-list hidden-xs" id="navigation">
               <ul class="list-inline">
                 <li><a href="http://192.168.0.104/IntelligentHouse/control">Panel kontrolny</a></li>
-                <li class="current-item"><a href="http://192.168.0.104/IntelligentHouse/logs" class="current-item">Logi</a></li>
-                <li><a href="http://192.168.0.104/IntelligentHouse/aboutProject">O projekcie</a></li>
+                <li><a href="http://192.168.0.104/IntelligentHouse/logs">Logi</a></li>
+                <li class="current-item"><a href="http://192.168.0.104/IntelligentHouse/aboutProject" class="current-item">O projekcie</a></li>
                 <li><a href="http://192.168.0.104/IntelligentHouse/contact">Kontakt</a></li>
               </ul>
               <span id="slide-line"></span>
@@ -66,8 +66,8 @@
             <div class="col-xs-12 col-md-8 menu-list-mobile visible-xs" id="navigation">
               <ul class="list-inline">
                 <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/control">Panel kontrolny</a></li>
-                <li class="current-item col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/logs" class="current-item">Logi</a></li>
-                <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/aboutProject">O projekcie</a></li>
+                <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/logs">Logi</a></li>
+                <li class="current-item col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/aboutProject" class="current-item">O projekcie</a></li>
                 <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/contact">Kontakt</a></li>
               </ul>
             </div>
@@ -81,49 +81,52 @@
 
         <div class="row logs">
 
-          <div class="col-md-12" id="logs">
+          <div class="col-md-12" id="aboutProject">
 
-            <ul id="pagination-top" class="pagination-sm"></ul>
+            <div class="col-xs-12 col-md-12">
+              <div class="about-img">
+                <img src="http://192.168.0.104/IntelligentHouse/frontend/img/intelligenthouse.jpg" width="200px" height="200px" class="img-circle" alt="Intelligent House Photo" />
+              </div>
+              <div class="about-name">
+                <h1>Intelligent House Project</h1>
+              </div>
+              <div class="about-role">
+                <h3>o nim słów kilka...</h3>
+              </div>
+              <div class="about-paragraph">
+                <p>...Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+            </div>
 
-            <table class="table table-striped table-responsive">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Component</th>
-                  <th>Action</th>
-                  <th>Date</th>
-                  <th>User</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
+              <div class="col-xs-12 col-md-6">
+                <div class="about-img">
+                  <img src="http://192.168.0.104/IntelligentHouse/frontend/img/bartekzych.jpg" width="200px" height="200px" class="img-circle" alt="Bartek Zych Photo" />
+                </div>
+                <div class="about-name">
+                  <h1>Bartek Zych</h1>
+                </div>
+                <div class="about-role">
+                  <h3>Mechanika domu</h3>
+                </div>
+                <div class="about-paragraph">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+              </div>
 
-                $logsQuery = $this -> model -> db -> prepare('SELECT * FROM logs');
-                $logsQuery->execute();
-
-                  if ( $logsQuery->rowCount() > 0 ) {
-                    while ( $log = $logsQuery->fetch() ) {
-
-                ?>
-                <tr>
-                  <td><?= $log['id']; ?></td>
-                  <td><?= $log['component']; ?></td>
-                  <td><?= $log['action']; ?></td>
-                  <td><?= $log['date']; ?></td>
-                  <td><?= $log['user']; ?></td>
-                </tr>
-                <?php
-                    }
-                  }
-                ?>
-              </tbody>
-            </table>
-
-            <p class="logs-bottom">
-              <ul class="pagination bootpag">
-
-              </ul>
-            </p>
+              <div class="col-xs-12 col-md-6">
+                <div class="about-img">
+                  <img src="http://192.168.0.104/IntelligentHouse/frontend/img/mateuszdomurad.jpg" width="200px" height="200px" class="img-circle" alt="Mateusz Domurad Photo" />
+                </div>
+                <div class="about-name">
+                  <h1>Mateusz Domurad</h1>
+                </div>
+                <div class="about-role">
+                  <h3>Zarządzanie domem</h3>
+                </div>
+                <div class="about-paragraph">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+              </div>
 
           </div>
 
