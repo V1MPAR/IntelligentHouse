@@ -36,6 +36,11 @@
     }
     ?>
     </style>
+    <style>
+      #ex1Slider .slider-selection {
+      	background: #BABABA;
+      }
+    </style>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro:700&amp;subset=latin-ext" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato&amp;subset=latin-ext" rel="stylesheet">
@@ -60,6 +65,21 @@
       }
       ?>
     </script>
+    <script>
+    // With JQuery
+      $('#ex1').slider({
+      formatter: function(value) {
+        return 'Current value: ' + value;
+      }
+      });
+
+      // Without JQuery
+      var slider = new Slider('#ex1', {
+      formatter: function(value) {
+        return 'Current value: ' + value;
+      }
+      });
+    </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -78,20 +98,25 @@
         <div class="row menu">
 
           <div class="col-xs-12">
-            <div class="col-xs-4 visible-xs menu-bars">
-              <i class="fa fa-bars"></i>
-            </div>
-            <div class="col-xs-8 col-md-4 menu-logo">
+            <div class="col-xs-12 col-md-4 menu-logo">
               <h1>Intelligent House</h1>
             </div>
-            <div class="col-md-8 hidden-xs menu-list" id="navigation">
+            <div class="col-xs-12 col-md-8 menu-list hidden-xs" id="navigation">
               <ul class="list-inline">
-                <li><a href="http://192.168.0.104/IntelligentHouse/">Home</a></li>
                 <li class="current-item"><a href="http://192.168.0.104/IntelligentHouse/control" class="current-item">Panel kontrolny</a></li>
+                <li><a href="http://192.168.0.104/IntelligentHouse/logs">Logi</a></li>
                 <li><a href="http://192.168.0.104/IntelligentHouse/about-project">O projekcie</a></li>
                 <li><a href="http://192.168.0.104/IntelligentHouse/contact">Kontakt</a></li>
               </ul>
               <span id="slide-line"></span>
+            </div>
+            <div class="col-xs-12 col-md-8 menu-list-mobile visible-xs" id="navigation">
+              <ul class="list-inline">
+                <li class="current-item col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/control" class="current-item">Panel kontrolny</a></li>
+                <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/logs">Logi</a></li>
+                <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/about-project">O projekcie</a></li>
+                <li class="col-xs-6"><a href="http://192.168.0.104/IntelligentHouse/contact">Kontakt</a></li>
+              </ul>
             </div>
           </div>
 
@@ -130,22 +155,28 @@
                     <div class="component-name">
                       <h1><?= $component['name']; ?></h1>
                       <p><?= $component['component']; ?></p>
-                      <?php if ( $component['condition'] == 0 ) { ?>
+                      <?php if ( $component['conditionComponent'] == 0 ) { ?>
                         <p id="<?= $component['type']; ?><?= $component['componentId']; ?>condition" class="off">Wyłączony</p>
-                      <?php } elseif ( $component['condition'] == 1 ) { ?>
+                      <?php } elseif ( $component['conditionComponent'] == 1 ) { ?>
                         <p id="<?= $component['type']; ?><?= $component['componentId']; ?>condition" class="on">Włączony</p>
+                        <?php if ( $component['type'] != 'door' ) { ?>
+                        <p id="<?= $component['type']; ?><?= $component['componentId']; ?>intesity">Moc: <?= $component['intesity']; ?></p>
+                        <?php } ?>
                       <?php } ?>
+                      <p id="<?= $component['type']; ?><?= $component['componentId']; ?>intesity"></p>
                     </div>
                     <div class="component-buttons">
-                      <?php if ( $component['condition'] == 0 ) { ?>
+                      <?php if ( $component['conditionComponent'] == 0 ) { ?>
+                        <input type="range" min="1" max="11" value="<?= $component['intesity']; ?>" class="component-range" id="<?= $component['type'] . $component['componentId'] . 'range'; ?>" style="display: none;" />
                         <button class="btn btn-success" id="<?= $component['type']; ?><?= $component['componentId']; ?>on">Włącz</button>
-                      <?php } elseif ( $component['condition'] == 1 && $component['type'] != 'door' ) { ?>
-                        <div class="well">
-                          <input id="<?= $component['type']; ?><?= $component['componentId']; ?>intesity" data-slider-id='<?= $component['type']; ?><?= $component['componentId']; ?>intesitySlider' type="text" data-slider-min="0" data-slider-max="11" data-slider-step="1" data-slider-value="<?= $component['intesity']; ?>" />
-                        </div>
+                        <button class="btn btn-danger" id="<?= $component['type']; ?><?= $component['componentId']; ?>off" style="display: none;">Wyłącz</button>
+                      <?php } elseif ( $component['conditionComponent'] == 1 && $component['type'] != 'door' ) { ?>
+                        <input type="range" min="1" max="11" value="<?= $component['intesity']; ?>" class="component-range" id="<?= $component['type'] . $component['componentId'] . 'range'; ?>" />
                         <button class="btn btn-danger" id="<?= $component['type']; ?><?= $component['componentId']; ?>off">Wyłącz</button>
-                      <?php } elseif ( $component['condition'] == 1 && $component['type'] != 'door' ) { ?>
+                        <button class="btn btn-success" id="<?= $component['type']; ?><?= $component['componentId']; ?>on" style="display: none;">Włącz</button>
+                      <?php } elseif ( $component['conditionComponent'] == 1 && $component['type'] == 'door' ) { ?>
                         <button class="btn btn-danger" id="<?= $component['type']; ?><?= $component['componentId']; ?>off">Wyłącz</button>
+                        <button class="btn btn-success" id="<?= $component['type']; ?><?= $component['componentId']; ?>on" style="display: none;">Włącz</button>
                       <?php } ?>
                     </div>
                   </div>
@@ -175,8 +206,101 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://192.168.0.104/IntelligentHouse/frontend/js/menu-line.js?<?php echo time(); ?>"></script>
-    <script src="http://192.168.0.104/IntelligentHouse/frontend/js/showBusNear.js?<?php echo time(); ?>"></script>
-    <script src="http://192.168.0.104/IntelligentHouse/frontend/js/showArticles.js?<?php echo time(); ?>"></script>
+
+    <script>
+    <?php
+      $componentsQuery = $this -> model -> db -> prepare('SELECT * FROM components');
+      $componentsQuery->execute();
+
+        if ( $componentsQuery->rowCount() > 0 ) {
+          while ( $component = $componentsQuery->fetch() ) {
+    ?>
+      $('<?= '#' . $component['type'] . $component['componentId'] . 'on'; ?>').on('click', function(){
+        var component = '<?= $component['type']; ?>';
+        var componentId = <?= $component['componentId']; ?>;
+        $.ajax({
+          type: "POST",
+          url: "http://192.168.0.104/IntelligentHouse/ajax/componentOn",
+          dataType : 'json',
+          data: {
+              ajax : 'componentOn',
+              type : component,
+              componentId : componentId
+          },
+          success: function(json) {
+            $('#<?= $component['type'] . $component['componentId'] . 'on'; ?>').hide();
+            $('#<?= $component['type'] . $component['componentId'] . 'off'; ?>').show();
+            $('#<?= $component['type']; ?><?= $component['componentId']; ?>condition').removeClass('off').html('Włączony').addClass('on');
+            if ( json.type != 'door' ) {
+              $('#<?= $component['type'] . $component['componentId'] . 'range'; ?>').show().attr('value', 1);
+              $('#<?= $component['type']; ?><?= $component['componentId']; ?>intesity').show().html('Moc: 1');
+            }
+          },
+          complete: function() {
+          },
+          error: function() {
+          }
+        });
+      });
+
+      $('<?= '#' . $component['type'] . $component['componentId'] . 'off'; ?>').on('click', function(){
+        var component = '<?= $component['type']; ?>';
+        var componentId = <?= $component['componentId']; ?>;
+        $.ajax({
+          type: "POST",
+          url: "http://192.168.0.104/IntelligentHouse/ajax/componentOff",
+          dataType : 'json',
+          data: {
+              ajax : 'componentOff',
+              type : component,
+              componentId : componentId
+          },
+          success: function(json) {
+            $('#<?= $component['type'] . $component['componentId'] . 'on'; ?>').show();
+            $('#<?= $component['type'] . $component['componentId'] . 'off'; ?>').hide();
+            $('#<?= $component['type']; ?><?= $component['componentId']; ?>condition').removeClass('on').html('Wyłączony').addClass('off');
+            if ( json.type != 'door' ) {
+              $('#<?= $component['type'] . $component['componentId'] . 'range'; ?>').attr('value', 0).hide();
+              $('#<?= $component['type']; ?><?= $component['componentId']; ?>intesity').hide().html('Moc: OFF');
+            }
+          },
+          complete: function() {
+          },
+          error: function() {
+          }
+        });
+      });
+
+      $('<?= '#' . $component['type'] . $component['componentId'] . 'range'; ?>').on('change', function(){
+        var component = '<?= $component['type']; ?>';
+        var componentId = <?= $component['componentId']; ?>;
+        var value = $(this).val();
+        $('#<?= $component['type']; ?><?= $component['componentId']; ?>intesity').show().html('Moc: ' + value + '');
+        $(this).attr('value', value);
+        $.ajax({
+          type: "POST",
+          url: "http://192.168.0.104/IntelligentHouse/ajax/changeIntesity",
+          dataType : 'json',
+          data: {
+              ajax : 'changeIntesity',
+              type : component,
+              componentId : componentId,
+              intesity : value
+          },
+          success: function(json) {
+
+          },
+          complete: function() {
+          },
+          error: function() {
+          }
+        });
+      });
+    <?php
+          }
+        }
+    ?>
+    </script>
 
   </body>
 </html>

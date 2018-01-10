@@ -46,6 +46,29 @@ html {
   }
 }
 
+.menu-list-mobile {
+  margin: 0;
+  padding-top: 39px;
+  padding-bottom: 5px;
+  text-align: center;
+  li {
+    display: inline-block;
+    a {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition-duration: 150ms;
+      display: inline-block;
+      font-size: 14px;
+      color: #000;
+      &:hover {
+        color: #CC4A1B;
+      }
+    }
+  }
+}
+
 .current-item {
   color: #CC4A1B !important;
 }
@@ -352,4 +375,9 @@ html {
       }
     }
   }
+}
+
+.component-range {
+  margin-bottom: 20px;
+  display: none;
 }
