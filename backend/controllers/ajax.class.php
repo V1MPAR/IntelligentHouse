@@ -37,6 +37,19 @@
         $componentQuery->bindValue(':componentId', $componentId, PDO::PARAM_STR);
         $componentQuery->execute();
 
+        $componentSelectQuery = $this -> model -> db -> prepare('SELECT * FROM components WHERE type = :type AND componentId = :componentId');
+        $componentSelectQuery->bindValue(':type', $type, PDO::PARAM_STR);
+        $componentSelectQuery->bindValue(':componentId', $componentId, PDO::PARAM_STR);
+        $componentSelectQuery->execute();
+
+        $component = $componentSelectQuery->fetch();
+
+        $date = date('Y-m-d H:i:s');
+        $user = 'Developer Alpha';
+
+        $logQuery = $this -> model -> db -> prepare("INSERT INTO logs VALUES(NULL, '" . $component['component'] . "', 'Changed OFF on ON (now is ON)', '$date', '$user')");
+        $logQuery->execute();
+
         echo json_encode($result);
 
       }
@@ -54,6 +67,19 @@
         $componentQuery->bindValue(':componentId', $componentId, PDO::PARAM_STR);
         $componentQuery->execute();
 
+        $componentSelectQuery = $this -> model -> db -> prepare('SELECT * FROM components WHERE type = :type AND componentId = :componentId');
+        $componentSelectQuery->bindValue(':type', $type, PDO::PARAM_STR);
+        $componentSelectQuery->bindValue(':componentId', $componentId, PDO::PARAM_STR);
+        $componentSelectQuery->execute();
+
+        $component = $componentSelectQuery->fetch();
+
+        $date = date('Y-m-d H:i:s');
+        $user = 'Developer Alpha';
+
+        $logQuery = $this -> model -> db -> prepare("INSERT INTO logs VALUES(NULL, '" . $component['component'] . "', 'Changed ON on OFF (now is OFF)', '$date', '$user')");
+        $logQuery->execute();
+
         echo json_encode($result);
 
       }
@@ -63,6 +89,19 @@
         $type = $_POST['type'];
         $componentId = $_POST['componentId'];
         $intesity = $_POST['intesity'];
+
+        $componentSelectQuery = $this -> model -> db -> prepare('SELECT * FROM components WHERE type = :type AND componentId = :componentId');
+        $componentSelectQuery->bindValue(':type', $type, PDO::PARAM_STR);
+        $componentSelectQuery->bindValue(':componentId', $componentId, PDO::PARAM_STR);
+        $componentSelectQuery->execute();
+
+        $component = $componentSelectQuery->fetch();
+
+        $date = date('Y-m-d H:i:s');
+        $user = 'Developer Alpha';
+
+        $logQuery = $this -> model -> db -> prepare("INSERT INTO logs VALUES(NULL, '" . $component['component'] . "', 'Changed INTESITY: " . $component['intesity'] . " on INTESITY: " . $intesity . "', '$date', '$user')");
+        $logQuery->execute();
 
         $componentQuery = $this -> model -> db -> prepare("UPDATE components SET intesity='$intesity' WHERE type = :type AND componentId = :componentId");
         $componentQuery->bindValue(':type', $type, PDO::PARAM_STR);
